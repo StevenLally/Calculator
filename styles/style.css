@@ -1,0 +1,15 @@
+.buttons {
+    display: grid;
+    grid-template-columns: 50px 50px 50px 50px;
+    grid-template-rows: 50px 50px 50px 50px 50px;
+}
+
+.backspace {
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.equal {
+    grid-column-start: 3;
+    grid-column-end: 5;
+}
