@@ -30,8 +30,6 @@ function operate(operator, a, b){
     }
 }
 
-let arr = [2, "+", 6, "/", 6, "+", 2, "*", 3, "-", 5 , "+"];
-
 function solve(arr){
     while (arr.length > 2){
         let a = arr.indexOf("+"); //add index
@@ -58,43 +56,64 @@ function solve(arr){
     }
     return arr;
 }
-console.log(solve(arr));
 
+function updateDisplay(){
+    display.textContent = equation.join(" ");
+    input.textContent = inputText.join("");
+}
 
 let equation = [];
+let inputText = [];
 
 const buttons = document.querySelectorAll("button");
-const backspace = document.querySelector(".backspace");
-const clear = document.querySelector(".clear");
-const equal = document.querySelector(".equal");
-const display = document.querySelector(".display");
-const input = document.querySelector(".input");
+const display = document.querySelectorAll(".display");
+const input = document.querySelectorAll(".input");
 
 
-/*
-Won't work as written, need:
-    1. number presses to add to a string and update input textContent
-    
-    2. event listeners for operators to add string then operator to 
-    equation arr, clear string
-*/
+// not working as expected, display not updating
 for (let i = 0; i < buttons.length; i++){
     buttons[i].addEventListener("click", function(){
         console.log(buttons[i].textContent);
-        if (buttons[i] == backspace && equation.length > 0){
-            equation.pop();
-            display.textContent = equation.join(" ");
-            input.textContent = "";
-        } else if (buttons[i] == clear){
-            equation = [];
-            display.textContent = equation.join(" ");
-            input.textContent = "";
-        } else if (buttons[i] == equal){
-            let result = solve(equation);
-            input.textContent = result[0];
-            equation = result[0];
-        } else {
-            equation.push(buttons[i].textContent);
+        
+        switch (buttons[i].textContent){
+            case "<--":
+                inputText.length > 0 ? inputText.pop : equation.pop();
+                updateDisplay();
+                break;
+        
+            case "AC":
+                equation = [];
+                inputText = [];
+                updateDisplay();
+                break;
+        
+            case "=":
+                let result = solve(equation);
+                input.textContent = result[0];
+                equation = result[0];
+                break;
+                
+            case ".":
+                if (!inputText.includes(".")){
+                    inputText.push(".");
+                }
+                break;
+        
+            case "+":
+            case "-":
+            case "*":
+            case "/":
+                equation.push(inputText.join(""));
+                equation.push(buttons[i].textContent);
+                inputText = [];
+                updateDisplay();
+                break;
+        
+            default:
+                inputText.push(buttons[i].textContent);
+                updateDisplay();
         }
     });
 }
+
+
