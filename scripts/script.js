@@ -1,3 +1,4 @@
+//basic operation functions
 function add(a, b){
     return a + b;
 }
@@ -29,7 +30,10 @@ function operate(operator, a, b){
             return divide(a, b);
     }
 }
-
+/*
+solve equation in array form following correct order of operations (mult and div left to 
+right followed by add and subtract)
+*/
 function solve(arr){
     while (arr.length > 2){
         let a = arr.indexOf("+"); //add index
@@ -75,11 +79,9 @@ const buttons = document.querySelectorAll("button");
 const display = document.querySelector(".display");
 const input = document.querySelector(".input");
 
-
-// not working as expected, display not updating
+//event listeners for each button on calculator
 for (let i = 0; i < buttons.length; i++){
     buttons[i].addEventListener("click", function(){
-        console.log(buttons[i].textContent);
         
         switch (buttons[i].textContent){
             case "AC":
@@ -120,9 +122,6 @@ for (let i = 0; i < buttons.length; i++){
                 inputText.push(buttons[i].textContent);
                 updateDisplay();
         }
-
-        console.log("equation = " + equation);
-        console.log("inputText = " + inputText);
     });
 }
 

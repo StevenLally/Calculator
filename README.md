@@ -9,4 +9,8 @@ Calculator Project from Odin Project Curriculum (https://www.theodinproject.com/
 #### 9/26/19
 - Fixed issue with displaying input and results
 - Calculator works as intended
-- May look into adding backspace button to calculator and adding keyboard support
+- May look into adding backspace button, keyboard support, protection to prevent overflow of display
+
+#### 9/28/19
+- Added some more CSS styling
+- Removed some unneccesary console.log lines from JS file, added some comments
